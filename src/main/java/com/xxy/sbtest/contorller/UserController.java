@@ -16,6 +16,7 @@ public class UserController {
   public List<User> selectUser(){
       return list;
 
+
   }
 
   @ApiOperation(value = "添加用户信息",notes = "根据Url添加用户信息")
