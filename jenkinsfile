@@ -7,7 +7,7 @@ pipeline {
             echo 'building jar ...'
             def maven = docker.image('maven:3.5.3-jdk-8')
              maven.pull()
-            mvn compile
+            mvn package
             }
         }
         stage('Test') {
