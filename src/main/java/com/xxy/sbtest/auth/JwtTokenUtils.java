@@ -8,9 +8,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class JwtTokenUtils {
     private static String security="lisongbo";
@@ -19,7 +17,6 @@ public class JwtTokenUtils {
         map.put("username","lisi");
         String sign = JWT.create().withHeader(map)
                 .withClaim("as", "lisi")
-                .withClaim("exp",new Date())
                 .sign(Algorithm.HMAC256(security));
 
         return sign;
@@ -30,7 +27,6 @@ public class JwtTokenUtils {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(key)).build();
         DecodedJWT verify = verifier.verify(token);
         Map<String, Claim> claims = verify.getClaims();
-        Claim exp = verify.getClaim("exp");
         System.out.println(claims.get("as").asString());
     }
 
@@ -38,5 +34,4 @@ public class JwtTokenUtils {
         String jwtToken = JwtTokenUtils.createJwtToken();
         JwtTokenUtils.verifyToken(jwtToken,security);
     }
-
 }
